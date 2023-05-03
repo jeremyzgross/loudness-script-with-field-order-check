@@ -12,7 +12,7 @@ BASE_PATH = '/Users/jeremyzgross/Downloads/BLACKSPOT QC/'
 # converts video files to sound only files (mp3s)
 def measure_loudness():
     badframerateCounter = 0
-#this is a test for git
+#this is a test for
     # for loop that loops through a directory in your OS. Replace the directory in the () to where your video files are located.
     for filename in os.listdir(BASE_PATH + 'TEST VIDEOS'):
         if not filename.endswith(".mp4") and not filename.endswith(".mov"):
