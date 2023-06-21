@@ -56,18 +56,16 @@ def measure_loudness():
     # for loop that measures loudness.  Replace the directory with where the converted video to audio file are placed
     loud_files = 0
     for filename in os.listdir(f'/Users/jeremyzgross/Downloads/BLACKSPOT QC/EXPORTED MP3s'):
-        if not filename.endswith(".mp3"):  # specifies that it is looking for mp3 files
+        if not filename.endswith(".mp3"):
             continue
-        data, rate = sf.read(
-            f'/Users/jeremyzgross/Downloads/BLACKSPOT QC/EXPORTED MP3s/{filename}')  # load audio (with shape (samples, channels)). Replace the directory in the () to where your audio files are located bewtween f and {filename}. Make sure there is a / at the end of your directory
-        meter = pyln.Meter(rate)  # create BS.1770 meter
-        loudness = meter.integrated_loudness(data)  # measure loudness
+        data, rate = sf.read(f'/Users/jeremyzgross/Downloads/BLACKSPOT QC/EXPORTED MP3s/{filename}')
+        meter = pyln.Meter(rate)
+        loudness = meter.integrated_loudness(data)
         sourceMp4Path = '/Users/jeremyzgross/Downloads/BLACKSPOT QC/GOOD VIDEOS/' + os.path.splitext(filename)[
-            0] +'.mov'
-        if loudness >= -22 and loudness <= -26:
-            # move mov to a folder GOOD
+            0] + '.mov'
+        if loudness >= -22 or loudness <= -26:
             shutil.move(sourceMp4Path, f'/Users/jeremyzgross/Downloads/BLACKSPOT QC/BAD VIDEOS')
-            badCounter += 1
+            loud_files += 1
 
         else:
             print(f'{filename} does not need to be moved.')
